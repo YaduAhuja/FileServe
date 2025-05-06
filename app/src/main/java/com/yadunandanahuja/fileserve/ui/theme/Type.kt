@@ -1,4 +1,4 @@
-package com.yadunandan.fileserve.ui.theme
+package com.yadunandanahuja.fileserve.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

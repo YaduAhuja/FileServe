@@ -1,4 +1,4 @@
-package com.yadunandan.fileserve.ui.theme
+package com.yadunandanahuja.fileserve.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
