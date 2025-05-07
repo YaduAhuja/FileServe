@@ -40,6 +40,13 @@ android {
 }
 
 dependencies {
+
+//    Ktor Server
+    implementation(libs.io.ktor.server.cio)
+    implementation(libs.io.ktor.server.core)
+    implementation(libs.io.ktor.server.html.builder)
+    implementation(libs.org.jetbrains.kotlinx.html)
+
 //    Navigation
 //    implementation(libs.androidx.navigation.compose)
 

@@ -23,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.core.net.toUri
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.yadunandanahuja.fileserve.data.models.FileInfoModel
 
@@ -55,6 +56,17 @@ fun HomeScreen(
         }) {
             Text("Add Files")
         }
+
+        Button(onClick = {
+            homeScreenViewModel.startServer {
+                contentResolver.openInputStream(it.contentUri.toUri())
+            }
+        }) {
+            Text("Start Server")
+        }
+
+        if (uiState.serverMessage.isNotEmpty())
+            Text(uiState.serverMessage)
 
         LazyColumn(
             modifier = Modifier

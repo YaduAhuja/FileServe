@@ -12,6 +12,8 @@ composeBom = "2025.04.01"
 navigationVersion = "2.8.9"
 roomVersion = "2.7.1"
 collectionsImmutableVersion = "0.3.8"
+ktorVersion = "3.1.2"
+kotlinx-html = "0.12.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -19,13 +21,17 @@ junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
-androidx-lifecycle-viewmodel-compose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "lifecycleRuntimeKtx"}
+androidx-lifecycle-viewmodel-compose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "lifecycleRuntimeKtx" }
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
 androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
-androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationVersion"}
-androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "roomVersion"}
-androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "roomVersion"}
-androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "roomVersion"}
+androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationVersion" }
+androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "roomVersion" }
+androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "roomVersion" }
+androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "roomVersion" }
+org-jetbrains-kotlinx-html = { group = "org.jetbrains.kotlinx", name = "kotlinx-html", version.ref = "kotlinx-html" }
+io-ktor-server-html-builder = { group = "io.ktor", name = "ktor-server-html-builder", version.ref = "ktorVersion" }
+io-ktor-server-cio = { group = "io.ktor", name = "ktor-server-cio", version.ref = "ktorVersion" }
+io-ktor-server-core = { group = "io.ktor", name = "ktor-server-core", version.ref = "ktorVersion" }
 androidx-ui = { group = "androidx.compose.ui", name = "ui" }
 androidx-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
 androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }

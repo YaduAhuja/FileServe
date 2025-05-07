@@ -6,6 +6,8 @@ import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.AP
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.CreationExtras
 import com.yadunandanahuja.fileserve.FileServeApplication
+import com.yadunandanahuja.fileserve.core.server.Server
+import com.yadunandanahuja.fileserve.core.utilities.getFirstIpV4WlanHost
 import com.yadunandanahuja.fileserve.data.models.FileInfoModel
 import com.yadunandanahuja.fileserve.data.repositories.FileInfoRepository
 import kotlinx.collections.immutable.ImmutableList
@@ -15,17 +17,18 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-
+import java.io.InputStream
 
 data class HomeScreenState(
-    val fileInfos: ImmutableList<FileInfoModel> = persistentListOf()
+    val fileInfos: ImmutableList<FileInfoModel> = persistentListOf(),
+    val serverMessage: String = ""
 )
-
 
 class HomeScreenViewModel(
     private val fileInfoRepository: FileInfoRepository
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(HomeScreenState())
+    private val server = Server()
     val uiState = _uiState.asStateFlow()
 
     init {
@@ -33,7 +36,7 @@ class HomeScreenViewModel(
             fileInfoRepository.truncate()
             val fileInfoFlow = fileInfoRepository.findAll()
             fileInfoFlow.collect {
-                _uiState.value = HomeScreenState(it.toImmutableList())
+                _uiState.value = _uiState.value.copy(it.toImmutableList())
             }
         }
     }
@@ -42,6 +45,23 @@ class HomeScreenViewModel(
         viewModelScope.launch(Dispatchers.IO) {
             fileInfoRepository.save(fileInfo)
         }
+    }
+
+    fun startServer(fileInfoInputStream: (FileInfoModel) -> InputStream?) {
+        val host = getFirstIpV4WlanHost()
+        if (host == null)
+            _uiState.value =
+                _uiState.value.copy(serverMessage = "Unable to find a network for hosting files")
+        else {
+            _uiState.value = _uiState.value.copy(serverMessage = "Server starting at $host")
+            server.start(uiState.value.fileInfos, fileInfoInputStream)
+        }
+
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        server.close()
     }
 
     companion object {
