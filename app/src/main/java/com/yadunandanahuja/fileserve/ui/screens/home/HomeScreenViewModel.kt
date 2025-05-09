@@ -47,6 +47,12 @@ class HomeScreenViewModel(
         }
     }
 
+    fun deleteFileInfo(fileInfo: FileInfoModel) {
+        viewModelScope.launch(Dispatchers.IO) {
+            fileInfoRepository.deleteById(fileInfo.id)
+        }
+    }
+
     fun startServer(fileInfoInputStream: (FileInfoModel) -> InputStream?) {
         val host = getFirstIpV4WlanHost()
         if (host == null)

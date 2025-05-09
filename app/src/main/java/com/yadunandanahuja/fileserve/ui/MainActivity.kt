@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import com.yadunandanahuja.fileserve.core.logging.Taggable
 import com.yadunandanahuja.fileserve.ui.screens.home.HomeScreen
 import com.yadunandanahuja.fileserve.ui.theme.FileServeTheme
@@ -20,7 +21,10 @@ class MainActivity : ComponentActivity(), Taggable {
         super.onCreate(savedInstanceState)
         val list = NetworkInterface.getNetworkInterfaces().toList()
         for (item in list) {
-            Log.i(TAG, "Network : Virtual ${item.isVirtual} Loopback : ${item.isLoopback} PTP : ${item.isPointToPoint} index : ${item.index} $item")
+            Log.i(
+                TAG,
+                "Network : Virtual ${item.isVirtual} Loopback : ${item.isLoopback} PTP : ${item.isPointToPoint} index : ${item.index} $item"
+            )
             val inetAddress = item.inetAddresses.toList()
             for (address in inetAddress) {
                 if (address.address.size == 4)
@@ -33,7 +37,12 @@ class MainActivity : ComponentActivity(), Taggable {
         setContent {
             FileServeTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Column(modifier = Modifier.padding(innerPadding).fillMaxSize()) {
+                    Column(
+                        modifier = Modifier
+                            .padding(innerPadding)
+                            .padding(8.dp)
+                            .fillMaxSize()
+                    ) {
                         HomeScreen()
                     }
                 }
